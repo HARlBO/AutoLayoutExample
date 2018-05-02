@@ -9,8 +9,10 @@
 import UIKit
 
 class MainViewController: UIViewController {
+    
     var button = [UIButton]()
-
+    let numberOfMenu = 5
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -60,7 +62,7 @@ class MainViewController: UIViewController {
         self.view.addSubview(bottomMenuView)
         self.view.addConstraints([leading, trailing, bottom, height])
         
-        for i in 0..<5 {
+        for i in 0..<numberOfMenu {
             button.append(UIButton(type: .system))
             button[i].setTitle("\(i)", for: .normal)
             button[i].translatesAutoresizingMaskIntoConstraints = false
@@ -68,19 +70,19 @@ class MainViewController: UIViewController {
             bottomMenuView.addSubview(button[i])
         }
         
-        for i in 0..<5 {
+        for i in 0..<numberOfMenu {
             if i == 0 {
                 let leading = NSLayoutConstraint(item: button[i], attribute: .leading, relatedBy: .equal, toItem: bottomMenuView, attribute: .leading, multiplier: 1, constant: 0)
                 
                 bottomMenuView.addConstraint(leading)
-            } else if i == 4 {
+            } else if i == numberOfMenu - 1 {
                  let leading = NSLayoutConstraint(item: button[i], attribute: .leading, relatedBy: .equal, toItem: button[i-1], attribute: .trailing, multiplier: 1, constant: 0)
                 let trailing = NSLayoutConstraint(item: bottomMenuView, attribute: .trailing, relatedBy: .equal, toItem: button[i], attribute: .trailing, multiplier: 1, constant: 0)
                 let width = NSLayoutConstraint(item: button[i], attribute: .width, relatedBy: .equal, toItem: button[i-1], attribute: .width, multiplier: 1, constant: 0)
                 
                 bottomMenuView.addConstraints([leading, trailing, width])
             } else {
-                let leading = NSLayoutConstraint(item: button[i], attribute: .leading, relatedBy: .equal, toItem: button[i-1], attribute: .trailing, multiplier: 1, constant: 0)              
+                let leading = NSLayoutConstraint(item: button[i], attribute: .leading, relatedBy: .equal, toItem: button[i-1], attribute: .trailing, multiplier: 1, constant: 0)
                 let width = NSLayoutConstraint(item: button[i], attribute: .width, relatedBy: .equal, toItem: button[i-1], attribute: .width, multiplier: 1, constant: 0)
                 
                 bottomMenuView.addConstraints([leading, width])
